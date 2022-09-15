@@ -10,6 +10,8 @@ public class MoveObject : MonoBehaviour
     float totalMoveDistance;
     Vector3 startingLocation;   
 
+    [SerializeField] GameObject stationarySphere;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +29,7 @@ public class MoveObject : MonoBehaviour
             FlipMoveDirection();
         }
 
-        //gameObject.transform.Translate(moveDirection * moveSpeed);
+        gameObject.transform.Translate(moveDirection * moveSpeed);
     }
 
     void FlipMoveDirection()
