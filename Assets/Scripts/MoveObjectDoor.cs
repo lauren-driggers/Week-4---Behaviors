@@ -2,15 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveObject : MonoBehaviour
+public class MoveObjectDoor : MonoBehaviour
 {
     [SerializeField] float moveSpeed;
     [SerializeField] Vector3 moveDirection;
 
     float totalMoveDistance;
     Vector3 startingLocation;   
-
-    [SerializeField] GameObject stationarySphere;
 
     // Start is called before the first frame update
     void Start()
@@ -24,12 +22,17 @@ public class MoveObject : MonoBehaviour
     {
         float distanceTraveled = GetDistanceTraveled();
 
-        if (distanceTraveled == totalMoveDistance)
+        if (distanceTraveled > totalMoveDistance)
         {
-            gameObject.transform.position = startingLocation;
+
+            while (gameObject.transform.position != startingLocation) {
+                gameObject.transform.Translate(-moveDirection * moveSpeed);
+            }
+            //gameObject.transform.position = startingLocation;
+            this.enabled = false;
         }
-        
-        gameObject.transform.Translate(-moveDirection * moveSpeed);
+
+        gameObject.transform.Translate(moveDirection * moveSpeed);
     }
 
     void FlipMoveDirection()
